@@ -7,10 +7,11 @@ import THREE, {
   MathUtils,
   Mesh,
   MeshPhysicalMaterial,
+  MeshStandardMaterial,
   Scene,
   Vector3,
 } from "three";
-import { useFrame } from "@react-three/fiber";
+import { MeshStandardMaterialProps, useFrame } from "@react-three/fiber";
 import {
   motion,
   useScroll,
@@ -18,18 +19,26 @@ import {
   MotionValue,
   useSpring,
 } from "framer-motion";
+import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 // import coin from "@/public/3d";
 type Props = {
   refScene?: Ref<Group> | undefined;
 };
-
+// type GLTFResult = GLTF & {
+//   nodes: {
+//     Pyramid: Mesh;
+//   };
+//   materials: {
+//     [`default`]: MeshStandardMaterial;
+//   };
+// };
 const Bottle = ({ refScene }: Props) => {
   let { scrollY } = useScroll();
   let rotationY = useSpring(scrollY, { damping: 50, stiffness: 222 });
-  const refCap = useRef<React.Ref<Mesh>>(null);
-  const refGlass = useRef<React.Ref<Mesh>>(null);
-  const refLiquidGas = useRef<React.Ref<Mesh>>(null);
-  const ref = useRef<React.Ref<Group>>(null);
+  const refCap = useRef<Mesh>(null);
+  const refGlass = useRef<Mesh>(null);
+  const refLiquidGas = useRef<Mesh>(null);
+  const ref = useRef<Group>(null);
   useEffect(() => {
     console.log("scrollY");
   });
@@ -51,7 +60,7 @@ const Bottle = ({ refScene }: Props) => {
     // ref.current.rotateOnWorldAxis(new Vector3(1, 0, 0), MathUtils.degToRad(25));
   }, []);
   useFrame((state, delta) => {
-    ref.current.rotation.y = rotationY.get() / 100;
+    ref.current!.rotation.y = rotationY.get() / 100;
     //selecting Axis
     // ref.current.rotateOnWorldAxis(new Vector3(0, 1, 0), rotationY.get() / 100);
   });
