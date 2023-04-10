@@ -24,14 +24,17 @@ import { GLTF } from "three/examples/jsm/loaders/GLTFLoader";
 type Props = {
   refScene?: Ref<Group> | undefined;
 };
-// type GLTFResult = GLTF & {
-//   nodes: {
-//     Pyramid: Mesh;
-//   };
-//   materials: {
-//     [`default`]: MeshStandardMaterial;
-//   };
-// };
+type GLTFResult = GLTF & {
+  nodes: {
+    bottle: Mesh;
+    final_model_lambert1_0: Mesh;
+    Sphere: Mesh;
+  };
+  materials: {
+    [`water`]: MeshStandardMaterial;
+    [`lambert1`]: MeshStandardMaterial;
+  };
+};
 const Bottle = ({ refScene }: Props) => {
   let { scrollY } = useScroll();
   let rotationY = useSpring(scrollY, { damping: 50, stiffness: 222 });
@@ -66,7 +69,7 @@ const Bottle = ({ refScene }: Props) => {
   });
   const openState = false;
   // const { scene } = useGLTF("/3d/magic.gltf");
-  const { nodes, materials } = useGLTF("/3d/magic.gltf");
+  const { nodes, materials } = useGLTF("/3d/magic.gltf") as GLTFResult;
 
   // scene.scale.set(0, 0, 0);
   // scene.rotation.set(0, 0, 0);
