@@ -22,7 +22,7 @@ export default function Home() {
       className={`${alegreya.className} flex flex-col items-center justify-center text-4xl font-bold italic text-slate-100`}
     >
       <DynamicComponentWithNoSSR />
-      <div className="fixed right-0 top-1/2 aspect-square w-1/2 -translate-y-1/2">
+      <div className="fixed left-0 right-0 top-1/2 aspect-square w-full -translate-y-1/2 md:left-auto md:w-1/2">
         <BottleScene />
       </div>
     </div>

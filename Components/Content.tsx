@@ -59,7 +59,7 @@ export default function Content({}: Props) {
               }}
               key={i}
               className="
-                flex w-full items-center justify-start p-12 text-5xl text-slate-100"
+                flex w-full items-center justify-start p-12 text-slate-100 md:text-5xl"
             >
               <motion.div
                 animate={{
